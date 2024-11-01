@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float fuerzaSalto;
     private Rigidbody2D rPlayer;
+    private Animator aPlayer;
     private float h;
 
     private bool miraDerecha = true;
@@ -19,12 +20,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rPlayer = GetComponent<Rigidbody2D>();
+        aPlayer = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         giraPlayer(h);
+        aPlayer.SetFloat("VelocidadX",Mathf.Abs(rPlayer.velocity.x));
+        aPlayer.SetFloat("VelocidadY",rPlayer.velocity.y);
+        aPlayer.SetFloat("TocaSuelo",rPlayer.velocity.y);
+
 
         //programar salto
         colPies = CheckGround.colPies;
